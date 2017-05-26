@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <h1>Posts</h1>
+    <% if user_signed_in? %>
+    <p><%= current_user.email.split('@').first %> 님 반갑습니다!<p>
+    <% end %>
+    <br>
+    <% if user_signed_in? %>
+      <a href = "/users/sign_out">[로그아웃]</a>
+
+    <% else %>
+      <a href = "/users/sign_up">[회원가입]</a>
+      <a href = "/users/sign_in">[로그인]</a>
+    <% end %>
+    <br>
+    <a href="/posts/new">[글쓰기]</a><br>
+      <% @posts.each do |post| %>
+        <div class="well">
+          제목 : <%= post.title %><br>
+          내용 : <%= post.content %><br>
+          글쓴이: <%= post.user.try(:email) %><br>
+          최근 수정: <%= time_ago_in_words(post.created_at) + ' ago' %><br><br>
+          <img src="<%= post.thumb_image_url %>" /><br>
+          <a href="<%= post.image_url %>" target="_blank"><%= post.image_url.try(:split, "uploads/").try(:last) %></a><br>
+          <% post.comments.each do |comment| %>
+            <%= comment.content %> // by <%= comment.user.try(:email) %> // <%= comment.created_at %> <a href = "/comments/delete/<%=comment.id%>">[delete]</a><br>
+            <% end %><br>
+            <form action="/posts/<%= post.id%>/comments" method="POST">
+             <textarea class="form-control" rows="1" placeholder = "Add a comment..." name="content"></textarea><br>
+             <button type="submit" class="btn btn-default">Submit</button><br><br>
+             <a href="/post/<%= post.id %>/edit">[글 수정]</a>
+             <a href="/post/<%= post.id %>/delete">[글 삭제]</a>
+            </form>
+        </div>
+      <% end %>
+     <br>
+  </div>
+</div>

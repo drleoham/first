@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <h1>new</h1><br>
+    <form action="/posts" method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" name="title" placeholder="Title">
+      </div>
+
+      <div class="form-group">
+        <label for="Textarea">Content</label>
+        <textarea class="form-control" rows="3" placeholder = "Content" name="content"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputFile">File input</label>
+        <input type="file" name="image_file" id="exampleInputFile">
+      </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    <% if flash[:error] %>
+      <%= flash[:error] %>
+    <% end %>
+  </div>
+</div>

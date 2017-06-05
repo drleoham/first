@@ -4,4 +4,5 @@ class Post < ActiveRecord::Base
     belongs_to :user
 
     validates :title, presence: { message: 'A title is required.' }
+    validates :content, presence: { message: 'Content is required.'}
 end

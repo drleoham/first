@@ -23,11 +23,22 @@ class PostsController < ApplicationController
       post.thumb_image_url = uploader.thumb.url
       post.save
 
+
       if post.save
+        flash[:message] = "Post successful."
         redirect_to '/'
       else
-        flash[:error] = post.errors.messages[:title][0]
-      render 'new'
+        messages = []
+
+        post.errors.messages.each_with_index do |msg, idx|
+          messages.push(msg[1][0])
+        end
+
+        @messages = messages.join('\n')
+      end
+
+      respond_to do |format|
+        format.js
       end
     end
 

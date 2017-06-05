@@ -56,5 +56,7 @@ group :development do
   gem "mini_magick"
 
   gem "figaro"
-  
+
+  gem "faker"
+
 end

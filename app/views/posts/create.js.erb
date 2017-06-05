@@ -1,0 +1,7 @@
+  <% if [:messsages] %>
+    // alert('<%= @messages %>');
+    sweetAlert("Oops...", '<%= @messages %>', "error");
+    <% else %>
+    // to index
+    window.location.href = 'http://localhost:3000/';
+<% end %>
